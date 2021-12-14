@@ -7,9 +7,13 @@ module SoundMode
       can_adapt :NotificationModel
   
       set_prologue :activate_sound_mode
+      set_epilogue :deactivate_sound_mode
   
       def activate_sound_mode()
-        puts('SOUND MODE ACTIVE')
+        puts('ACTIVATE sound mode')
+      end
+      def deactivate_sound_mode()
+        puts('DEACTIVATE sound mode')
       end
   
     end

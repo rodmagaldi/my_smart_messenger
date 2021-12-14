@@ -7,9 +7,13 @@ module DarkMode
       can_adapt :ScreenModel
   
       set_prologue :activate_dark_mode
+      set_epilogue :deactivate_dark_mode
   
       def activate_dark_mode()
-        puts('DARK SCREEN MODE ACTIVE')
+        puts('ACTIVATE dark mode')
+      end
+      def deactivate_dark_mode()
+        puts('DEACTIVATE dark mode')
       end
   
     end

@@ -34,7 +34,6 @@ class AppContextModelDeclaration < ContextModelDeclaration
 		abstract_context :@date, 'Date'
 		context :@friend_birthday, 'FriendsBirthday'
 
-		@date.default @friend_birthday
 		@date.relation :Optional, [@friend_birthday]
 	end
 
@@ -50,7 +49,7 @@ class AppContextModelDeclaration < ContextModelDeclaration
 		context :@low_noise, 'LowNoise'
 		context :@high_noise, 'HighNoise'
 
-		@noise_level.default @low_noise
+		@noise_level.default @high_noise
 		@noise_level.relation :Alternative, [@low_noise, @high_noise]
 	end
 
@@ -76,7 +75,7 @@ class AppContextModelDeclaration < ContextModelDeclaration
 		context :@work, 'Work'
 		context :@school, 'School'
 
-		@status.default @free
+		@status.default @school
 		@status.relation :Alternative, [@free, @work, @school]
 	end
 end
