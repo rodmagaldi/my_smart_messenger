@@ -52,17 +52,17 @@ class AppFeatureModelDeclaration < FeatureModelDeclaration
 	end
 
 	def _define_conversation_features()
-		abstract_feature :@conversation, 'Conversation'
-		abstract_feature :@send_message, 'Send message'
+		feature :@conversation, 'Conversation', [:ConversationModel]
+		feature :@send_message, 'SendMessage', [:MessageModel]
 		@conversation.relation :Mandatory, [@send_message]
 
 		abstract_feature :@special_message, 'SpecialMessage'
 		@send_message.relation :Optional, [@special_message]
 
-		feature :@birthday_message, 'BirthdayMessage', [:SpecialMessageModel]
-		feature :@nearby_friend_message, 'NearbyFriendMessage', [:SpecialMessageModel]
-		feature :@low_battery_message, 'LowBatteryMessage', [:SpecialMessageModel]
-		feature :@busy_message, 'BusyMessage', [:SpecialMessageModel]
+		feature :@birthday_message, 'BirthdayMessage', [:ConversationModel]
+		feature :@nearby_friend_message, 'NearbyFriendMessage', [:ConversationModel]
+		feature :@low_battery_message, 'LowBatteryMessage', [:ConversationModel]
+		feature :@busy_message, 'BusyMessage', [:ConversationModel]
 		@special_message.relation :Optional, [@birthday_message, @nearby_friend_message, @low_battery_message, @busy_message]
 	end
 
