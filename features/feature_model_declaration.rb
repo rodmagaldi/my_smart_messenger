@@ -24,7 +24,7 @@ class AppFeatureModelDeclaration < FeatureModelDeclaration
 		_define_notification_features()
 		_define_conversation_features()
 
-		@root_feature.relation :Mandatory, [@account, @notification, @conversation]
+		@root_feature.relation :Mandatory, [@notification]
 	end
 
 	private
@@ -37,33 +37,33 @@ class AppFeatureModelDeclaration < FeatureModelDeclaration
 		abstract_feature :@screen, 'Screen'
 		@settings.relation :Optional, [@screen]
 
-		feature :@dark_mode, 'Dark mode'
-		feature :@normal_mode, 'Normal mode'
+		feature :@dark_mode, 'DarkMode', [:ScreenModel]
+		feature :@normal_mode, 'NormalMode', [:ScreenModel]
 		@screen.relation :Alternative, [@dark_mode, @normal_mode]
 	end
 
 	def _define_notification_features()
 		abstract_feature :@notification, 'Notification'
-		feature :@silent_mode, 'Silent mode'
-		feature :@vibrating_mode, 'Vibrating mode'
-		feature :@sound_mode, 'Sound mode'
+		feature :@silent_mode, 'SilentMode', [:NotificationModel]
+		feature :@vibrating_mode, 'VibratingMode', [:NotificationModel]
+		feature :@sound_mode, 'SoundMode', [:NotificationModel]
 
 		@notification.relation :Alternative, [@silent_mode, @vibrating_mode, @sound_mode]
 	end
 
 	def _define_conversation_features()
 		abstract_feature :@conversation, 'Conversation'
-		feature :@send_message, 'Send message'
+		abstract_feature :@send_message, 'Send message'
 		@conversation.relation :Mandatory, [@send_message]
 
-		feature :@special_message, 'Special message'
+		abstract_feature :@special_message, 'SpecialMessage'
 		@send_message.relation :Optional, [@special_message]
 
-		feature :@birthday_message, 'Birthday message'
-		feature :@nearby_friend_message, 'Nearby friend message'
-		feature :@low_battery_message, 'Low battery message'
-		feature :@busy_message, 'Busy message'
-		@special_message.relation :Alternative, [@birthday_message, @nearby_friend_message, @low_battery_message, @busy_message]
+		feature :@birthday_message, 'BirthdayMessage', [:SpecialMessageModel]
+		feature :@nearby_friend_message, 'NearbyFriendMessage', [:SpecialMessageModel]
+		feature :@low_battery_message, 'LowBatteryMessage', [:SpecialMessageModel]
+		feature :@busy_message, 'BusyMessage', [:SpecialMessageModel]
+		@special_message.relation :Optional, [@birthday_message, @nearby_friend_message, @low_battery_message, @busy_message]
 	end
 
 end
