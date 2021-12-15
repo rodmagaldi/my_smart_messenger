@@ -24,7 +24,7 @@ class AppFeatureModelDeclaration < FeatureModelDeclaration
 		_define_notification_features()
 		_define_conversation_features()
 
-		@root_feature.relation :Mandatory, [@notification]
+		@root_feature.relation :Mandatory, [@notification, @account, @conversation]
 	end
 
 	private
